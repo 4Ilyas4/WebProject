@@ -1,4 +1,4 @@
-# Thor fitness
+# Flight Ticket Finder
 
 ## Description
 
