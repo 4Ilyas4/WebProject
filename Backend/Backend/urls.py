@@ -11,8 +11,8 @@ urlpatterns = [
     path('flights/<int:pk>/', views.flight_detail, name='flight-detail'),
     path('tickets/', views.UserTickets.as_view(), name='ticket-list'),
     path('ticket/<int:pk>/', views.TicketDetails.as_view(), name='ticket-details'),
-    path('payments/', views.UserPayments.as_view(), name='payment'),
+    path('payments/', views.user_payments, name='payment'),
     path('user/', views.user_detail, name='user-detail'), 
-    path('payments/create/<int:pk>/', views.make_payment, name='create-payment'),
+    path('payments/create/<int:pk>', views.make_payment, name='create-payment'),
 ]
 

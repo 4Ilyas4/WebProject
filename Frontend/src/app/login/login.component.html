@@ -1,0 +1,11 @@
+<form (submit)="login()">
+  <div>
+    <input type="email" name="email" [(ngModel)]="email" placeholder="Email" required>
+  </div>
+  <div>
+    <input type="password" name="password" [(ngModel)]="password" placeholder="Password" required>
+  </div>
+  <button type="submit">Login</button>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</form>
+<p>Еще нет аккаунта? <a [routerLink]="['/register']">Зарегистрироваться</a></p>

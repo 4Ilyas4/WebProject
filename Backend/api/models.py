@@ -1,21 +1,53 @@
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import PermissionsMixin
+
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None):
+    def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('Users must have an email address')
-        user = self.model(email=self.normalize_email(email))
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
-class User(AbstractBaseUser):
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self.create_user(email, password, **extra_fields)
+
+class User(AbstractBaseUser, PermissionsMixin):
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
     email = models.EmailField(unique=True)
-    objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
+    objects = UserManager()
+
     def __str__(self):
         return self.email
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # Create token for the user after saving
+    def has_perm(self, perm, obj=None):
+        # Simplest possible answer: Yes, always
+        return True
+    
+    def has_module_perms(self, app_label):
+        # Implement your logic here to check if the user has permissions for the specified app_label
+        return True 
+
 class Flight(models.Model):
     flight_id = models.AutoField(primary_key=True)
     departure_airport = models.CharField(max_length=100, db_index=True)
