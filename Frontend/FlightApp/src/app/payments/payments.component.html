@@ -1,0 +1,30 @@
+<div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="payments.length > 0">
+    <h2>Payments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Price</th>
+          <!-- Add more columns as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.payment_id }}</td>
+          <td>{{ payment.user }}</td>
+          <td>{{ payment.price }}</td>
+          <!-- Add more columns as needed -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div *ngIf="payments.length === 0 && !errorMessage">
+    <p>No payments found.</p>
+  </div>
+  

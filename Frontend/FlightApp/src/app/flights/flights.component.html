@@ -1,0 +1,13 @@
+<div *ngIf="flights$ | async as flights">
+    <h2>Flights</h2>
+    <ul>
+      <li *ngFor="let flight of flights">
+        <a [routerLink]="['flights/',flight.flight_id]"><strong>Buy Flight : </strong> {{ flight.flight_id }}</a>
+        <p><strong>Departure Airport:</strong> {{ flight.departure_airport }}</p>
+        <p><strong>Arrival Airport:</strong> {{ flight.arrival_airport }}</p>
+        <p><strong>Departure Time:</strong> {{ flight.departure_time | date }}</p>
+        <p><strong>Arrival Time:</strong> {{ flight.arrival_time | date }}</p>
+        <p><strong>Price:</strong> {{ flight.price }}</p>
+      </li>
+    </ul>
+</div>
