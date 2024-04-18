@@ -8,6 +8,7 @@ urlpatterns = [
     path('login/', views.UserLogin.as_view(), name='user-login'),
     path('admin/', admin.site.urls),
     path('flights/', views.flight_list, name='flight-list'),
+    path('flights/search/', views.flight_search, name='search-flight'),
     path('flights/<int:pk>/', views.flight_detail, name='flight-detail'),
     path('tickets/', views.UserTickets.as_view(), name='ticket-list'),
     path('ticket/<int:pk>/', views.TicketDetails.as_view(), name='ticket-details'),

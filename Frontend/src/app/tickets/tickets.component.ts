@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Ticket } from '../ticket';
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
@@ -14,16 +14,24 @@ import { AuthService } from '../auth.service';
 })
 export class TicketsComponent implements OnInit {
   tickets: Ticket[] = [];
-
   authService! : AuthService
-  constructor(private apiService: ApiService,
+
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
     authService : AuthService
-  ) { this.authService = authService }
+  ) { 
+    this.authService = authService 
+  }
 
   ngOnInit(): void {
     this.loadTickets();
   }
 
+  goBack(): void {
+    this.router.navigate(['/']); 
+  }
+  
   loadTickets(): void {
     this.apiService.getTickets().subscribe(
       (tickets: Ticket[]) => {
@@ -34,6 +42,7 @@ export class TicketsComponent implements OnInit {
       }
     );
   }
+  
   logout() {
     this.authService.logout()
   }

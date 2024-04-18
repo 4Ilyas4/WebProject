@@ -1,11 +1,18 @@
-<div *ngIf="authService.isLoggedIn()">
-  <button (click)="logout()">Logout</button>
-</div>
-<div class="home-container">
-    <h2>Домашняя страница</h2>
-    <ul>
-      <li><a routerLink="/tickets">Билеты</a></li>
-      <li><a routerLink="/flights">Рейсы</a></li>
-      <li><a routerLink="/payments">Платежи</a></li>
-    </ul>
+<header class="header">
+  <h1>Авиа билеты</h1>
+</header>
+
+<div class="container">
+  <div *ngIf="authService.isLoggedIn()" class="logout">
+      <button (click)="logout()">Выйти</button>
+  </div>
+
+  <div class="home-container">
+      <h2>Домашняя страница</h2>
+      <ul class="menu">
+          <li><a routerLink="/tickets">Билеты</a></li>
+          <li><a routerLink="/flights">Рейсы</a></li>
+          <li><a routerLink="/payments">Платежи</a></li>
+      </ul>
+  </div>
 </div>

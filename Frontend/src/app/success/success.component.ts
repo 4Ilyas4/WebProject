@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-success',
@@ -13,12 +14,17 @@ export class SuccessComponent {
   authService! : AuthService
 
   constructor(
-    authService : AuthService
+    private router: Router,
+    authService : AuthService 
   ) { 
     this.authService = authService
   }
 
   logout() {
     this.authService.logout()
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']); 
   }
 }

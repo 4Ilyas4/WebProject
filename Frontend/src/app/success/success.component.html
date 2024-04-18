@@ -1,4 +1,7 @@
-<div *ngIf="authService.isLoggedIn()">
-    <button (click)="logout()">Logout</button>
+<div class="container">
+    <div *ngIf="authService.isLoggedIn()">
+        <button class="logout-button" (click)="logout()">Logout</button>
+    </div>
+    <p>Payment was successful!</p>
+    <button class="back-button" (click)="goBack()">Назад</button>
 </div>
-<p>Payment was successful!</p>

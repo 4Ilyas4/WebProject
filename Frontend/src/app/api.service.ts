@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Flight } from './flight';
@@ -32,6 +32,15 @@ export class ApiService {
     return this.http.get<Flight[]>(`${this.baseUrl}/flights/`, { headers });
   }
 
+  searchFlights(maxPrice: number): Observable<Flight[]> {
+    if (!this.accessToken) {
+      throw new Error('Access token not found');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
+    const params = new HttpParams().set('max_price', maxPrice.toString());
+    return this.http.get<Flight[]>(`${this.baseUrl}/flights/search/`, { params, headers });
+  }
+  
   getFlightDetail(id: number): Observable<any> {
     if (!this.accessToken) {
       throw new Error('Access token not found');

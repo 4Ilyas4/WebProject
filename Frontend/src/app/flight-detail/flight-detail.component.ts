@@ -41,7 +41,11 @@ export class FlightDetailComponent implements OnInit {
   logout() {
     this.authService.logout()
   }
-  
+
+  goBack(): void {
+    this.router.navigate(['/flights']); 
+  }
+
   buyTicket(): void {
     if(this.flightId){
       this.apiService.createPayment(this.flightId).subscribe(

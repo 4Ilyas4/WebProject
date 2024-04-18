@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Payment } from '../payment';
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
@@ -19,6 +19,7 @@ export class PaymentsComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
+    private router: Router,
     authService : AuthService
   ) {
     this.authService = authService 
@@ -41,5 +42,9 @@ export class PaymentsComponent implements OnInit {
         this.errorMessage = error.message;
       }
     );
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']); 
   }
 }

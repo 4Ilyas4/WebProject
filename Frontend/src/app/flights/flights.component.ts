@@ -1,26 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Flight } from '../flight';
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-flights',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, FormsModule ],
   templateUrl: './flights.component.html',
   styleUrl: './flights.component.css'
 })
 export class FlightsComponent implements OnInit {
-    flights$!: Observable<Flight[]>;
-  
-    constructor(
-      private apiService: ApiService
-      ,authService : AuthService
-    ) { this.authService = authService }
+    flights$!: Flight[];
+    maxPrice: string = "0";
     authService! : AuthService
+
+    constructor(
+      private apiService: ApiService,
+      private router: Router,
+      authService : AuthService,
+    ) { 
+      this.authService = authService 
+    }
   
     ngOnInit(): void {
       this.loadFlights();
@@ -30,8 +35,30 @@ export class FlightsComponent implements OnInit {
       this.authService.logout()
     }
 
-    loadFlights() {
-      this.flights$ = this.apiService.getFlights();
+    loadFlights(): void {
+      this.apiService.getFlights().subscribe(
+        (flights: Flight[]) => {
+          this.flights$ = flights;
+        },
+        (error) => {
+          console.error('Error fetching flights:', error);
+        }
+      );
     }
-    
+
+    searchFlights(maxPrice: string): void {
+      const price = parseFloat(maxPrice);
+      this.apiService.searchFlights(price).subscribe(
+        (flights: Flight[]) => {
+          this.flights$ = flights;
+        },
+        (error) => {
+          console.error('Error fetching flights:', error);
+        }
+      );
+    }
+
+    goBack(): void {
+      this.router.navigate(['/']); 
+    }
 }
