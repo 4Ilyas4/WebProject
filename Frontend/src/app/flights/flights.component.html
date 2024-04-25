@@ -1,123 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Listings</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
+<div class="container">
+  <div *ngIf="authService.isLoggedIn()">
+      <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
+  <button class="menu-button" (click)="goBack()">Назад</button>
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .menu-button,
-        .logout-button {
-            margin-bottom: 10px;
-            padding: 10px 20px;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .menu-button {
-            background-color: #007bff;
-        }
-
-        .menu-button:hover {
-            background-color: #0056b3;
-        }
-
-        .logout-button {
-            background-color: #d9534f;
-        }
-
-        .logout-button:hover {
-            background-color: #c9302c;
-        }
-
-        .search-form {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-form input[type="number"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-            flex: 1;
-        }
-
-        .search-form button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .search-form button:hover {
-            background-color: #218838;
-        }
-
-        .flight-item {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .flight-item a {
-            text-decoration: none;
-            color: blue;
-        }
-
-        .flight-item a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div *ngIf="authService.isLoggedIn()">
-            <button class="logout-button" (click)="logout()">Logout</button>
-        </div>
-        <button class="menu-button" (click)="goBack()">Back</button>
-        <div *ngIf="flights$ as flights">
-            <h2>Flights</h2>
-            <form class="search-form" (ngSubmit)="searchFlights(maxPrice.value)">
-                <input type="number" #maxPrice placeholder="Maximum Price">
-                <button type="submit">Search</button>
-            </form>
-            <ul>
-                <li class="flight-item" *ngFor="let flight of flights">
-                    <a [routerLink]="['/flights/',flight.flight_id]">
-                        <strong>Flight ID: </strong>{{ flight.flight_id }}
-                    </a>
-                    <p><strong>Departure Airport:</strong> {{ flight.departure_airport }}</p>
-                    <p><strong>Arrival Airport:</strong> {{ flight.arrival_airport }}</p>
-                    <p><strong>Departure Time:</strong> {{ flight.departure_time | date }}</p>
-                    <p><strong>Arrival Time:</strong> {{ flight.arrival_time | date }}</p>
-                    <p><strong>Price:</strong> {{ flight.price }}</p>
-                </li>
-            </ul>
-        </div>
-    </div>
-</body>
-</html>
-
+  <div *ngIf="flights$ as flights">
+      <h2>Flights</h2>
+      <form class="search-form" (ngSubmit)="searchFlights(maxPrice.value, departureAirport.value, departureTime.value)">
+        <input type="number" #maxPrice placeholder="Максимальная цена">
+        <input type="text" #departureAirport placeholder="Аэропорт отправления">
+        <input type="text" #departureTime placeholder="YYYY-MM-DD">
+        <button type="submit">Поиск</button>
+    </form>
+      <ul>
+          <li class="flight-item" *ngFor="let flight of flights">
+              <a [routerLink]="['/flights/',flight.flight_id]"><strong>Buy Flight: </strong>{{ flight.flight_id }}</a>
+              <p><strong>Departure Airport:</strong> {{ flight.departure_airport }}</p>
+              <p><strong>Arrival Airport:</strong> {{ flight.arrival_airport }}</p>
+              <p><strong>Departure Time:</strong> {{ flight.departure_time | date }}</p>
+              <p><strong>Arrival Time:</strong> {{ flight.arrival_time | date }}</p>
+              <p><strong>Price:</strong> {{ flight.price }}</p>
+          </li>
+      </ul>
+  </div>

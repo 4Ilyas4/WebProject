@@ -18,6 +18,8 @@ export class FlightsComponent implements OnInit {
     flights$!: Flight[];
     maxPrice: string = "0";
     authService! : AuthService
+    departureAirport: string = "";
+    departureTime: string = "";
 
     constructor(
       private apiService: ApiService,
@@ -46,9 +48,12 @@ export class FlightsComponent implements OnInit {
       );
     }
 
-    searchFlights(maxPrice: string): void {
+    searchFlights(maxPrice : string, departureAirport: string, departureTime: string ): void {
       const price = parseFloat(maxPrice);
-      this.apiService.searchFlights(price).subscribe(
+      const airport = departureAirport;
+      const time = departureTime;
+
+      this.apiService.searchFlights(price, airport, time).subscribe(
         (flights: Flight[]) => {
           this.flights$ = flights;
         },

@@ -32,12 +32,12 @@ export class ApiService {
     return this.http.get<Flight[]>(`${this.baseUrl}/flights/`, { headers });
   }
 
-  searchFlights(maxPrice: number): Observable<Flight[]> {
+  searchFlights(maxPrice: number,airport: string,time: string): Observable<Flight[]> {
     if (!this.accessToken) {
       throw new Error('Access token not found');
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.accessToken}`);
-    const params = new HttpParams().set('max_price', maxPrice.toString());
+    const params = new HttpParams().set('max_price', maxPrice.toString()).set('airport', airport).set('time', time);
     return this.http.get<Flight[]>(`${this.baseUrl}/flights/search/`, { params, headers });
   }
   

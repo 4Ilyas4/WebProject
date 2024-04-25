@@ -1,100 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Details</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-
-        .logout-button,
-        .buy-button,
-        .back-button {
-            margin-bottom: 10px;
-            padding: 10px 20px;
-            border: none;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .logout-button {
-            background-color: #d9534f;
-        }
-
-        .buy-button {
-            background-color: #007bff;
-        }
-
-        .back-button {
-            background-color: #6c757d;
-        }
-
-        .logout-button:hover {
-            background-color: #c9302c;
-        }
-
-        .buy-button:hover {
-            background-color: #0056b3;
-        }
-
-        .back-button:hover {
-            background-color: #5a6268;
-        }
-
-        .flight-detail {
-            margin-bottom: 20px;
-        }
-
-        .flight-detail p {
-            margin: 5px 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Flight Details</h1>
-        </div>
-        <div *ngIf="authService.isLoggedIn()">
-            <button class="logout-button" (click)="logout()">Logout</button>
-        </div>
-        <div *ngIf="flight$ | async as flight" class="flight-detail">
-            <h2>Flight Detail</h2>
-            <p><strong>Flight ID:</strong> {{ flight.flight_id }}</p>
-            <p><strong>Departure Airport:</strong> {{ flight.departure_airport }}</p>
-            <p><strong>Arrival Airport:</strong> {{ flight.arrival_airport }}</p>
-            <p><strong>Departure Time:</strong> {{ flight.departure_time | date }}</p>
-            <p><strong>Arrival Time:</strong> {{ flight.arrival_time | date }}</p>
-            <p><strong>Price:</strong> {{ flight.price }}</p>
-            <button class="buy-button" (click)="buyTicket()">Buy Ticket</button>
-        </div>
-        <button class="back-button" (click)="goBack()">Back</button>
+<div class="container">
+    <div *ngIf="authService.isLoggedIn()">
+        <button class="logout-button" (click)="logout()">Logout</button>
     </div>
-</body>
-</html>
+    <div *ngIf="flight$ | async as flight" class="flight-detail">
+        <h2>Flight Detail</h2>
+        <p><strong>Flight ID:</strong> {{ flight.flight_id }}</p>
+        <p><strong>Departure Airport:</strong> {{ flight.departure_airport }}</p>
+        <p><strong>Arrival Airport:</strong> {{ flight.arrival_airport }}</p>
+        <p><strong>Departure Time:</strong> {{ flight.departure_time | date }}</p>
+        <p><strong>Arrival Time:</strong> {{ flight.arrival_time | date }}</p>
+        <p><strong>Price:</strong> {{ flight.price }}</p>
+        <button class="buy-button" (click)="buyTicket()">Buy Ticket</button>
+    </div>
+    <button class="back-button" (click)="goBack()">Назад</button>
+</div>
