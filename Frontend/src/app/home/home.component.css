@@ -1,63 +1,122 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
-
-.header {
-    background-color: #333;
+/* .banner {
+    position: relative;
+    width: 100%;
+    padding: 0 100px;
+  }
+  
+  .banner .bg {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    background: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .content h2 {
+    position: relative;
     color: #fff;
-    padding: 10px;
-    text-align: center;
-}
-
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.menu {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu li {
-    margin-bottom: 10px;
-}
-
-.menu li a {
+    font-size: 6em;
+  }
+  
+  .content h2:hover {
+    cursor: default;
+  }
+  
+  .content .btn {
+    display: inline-block;
+    background: #00a698;
+    color: #fff;
+    padding: 20px 40px;
     text-decoration: none;
-    color: #333;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    display: block;
-}
-
-.menu li a:hover {
-    background-color: #f0f0f0;
-}
-
-.logout {
-    text-align: center;
+    letter-spacing: 2px;
+    font-size: 1.1em;
     margin-top: 20px;
-}
-
-.logout button {
-    padding: 10px 20px;
-    background-color: #d9534f;
-    border: none;
-    color: #fff;
-    border-radius: 5px;
+  }
+  
+  .content .btn:hover {
     cursor: pointer;
-}
-
-.logout button:hover {
-    background-color: #c9302c;
-}
+  }
+  
+  .searchBox {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    padding: 30px 50px;
+    flex-wrap: wrap;
+    transform: translateY(50%);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    animation: 1s slidefades 0.1s forwards;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  .airport_holder {
+    width: 15%;
+    position: absolute;
+    padding: 5px;
+    display: block;
+    bottom: 100%;
+    background: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  @keyframes slidefades {
+    100% {
+      opacity: 1;
+      margin: 0;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .banner {
+      padding: 0px;
+    }
+    .searchBox{
+      flex-direction: column;
+      
+    }
+  
+    .searchBox div{
+      margin-bottom: 5px;
+    }
+  
+    .airport_holder{
+      width: 91%;
+      bottom: 98%;
+      left:5%
+    }
+  
+    #book-btn{
+      display: none;
+    }
+  
+    .content{
+      padding: 0px 10px;
+    }
+  } */
