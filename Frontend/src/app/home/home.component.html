@@ -1,18 +1,131 @@
-<header class="header">
-  <h1>Авиа билеты</h1>
-</header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- background-image -->
+    
+    <title>Avia Tickets</title>
+    <style>
+            body {
+            font-family: Arial, sans-serif;
+            /* margin: 0; */
+            /* padding: 0; */
+            background-image: url('../assets/flightImges/img1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
 
-<div class="container">
-  <div *ngIf="authService.isLoggedIn()" class="logout">
-      <button (click)="logout()">Выйти</button>
-  </div>
+        .header {
+            /* background-color: #333; */
+            color: #fff;
+            text-align: center;
+            padding: 40px 0;
+        }
 
-  <div class="home-container">
-      <h2>Домашняя страница</h2>
-      <ul class="menu">
-          <li><a routerLink="/tickets">Билеты</a></li>
-          <li><a routerLink="/flights">Рейсы</a></li>
-          <li><a routerLink="/payments">Платежи</a></li>
-      </ul>
-  </div>
-</div>
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            /* background-color: #fff; */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-container {
+            text-align: center;
+        }
+
+        .menu {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .menu li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            /* color: #333; */
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+
+        /* .menu li a:hover { */
+            /* background-color: #ccc; */
+        /* } */
+
+        .banner {
+            position: relative;
+            width: 100%;
+            /* padding: 0 100px; */
+        }
+
+        .banner .bg {
+            position: relative;
+            width: 100%;
+            height: 75vh;
+            /* background: #555; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .content h2 {
+            font-size: 6em;
+            margin-bottom: 20px;
+        }
+
+        .content .btn {
+            display: inline-block;
+            /* background: #00a698; */
+            /* color: #fff; */
+            padding: 20px 40px;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-size: 1.1em;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .content .btn:hover {
+            /* background-color: #00887b; */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Flight Tickets</h1>
+    </header>
+
+    <div class="banner">
+        <div class="bg">
+            <div class="content">
+                <h2>Home Menu</h2>
+                <ul class="menu">
+                    <li><a routerLink="/tickets">Tickets</a></li>
+                    <li><a routerLink="/flights">Races</a></li>
+                    <li><a routerLink="/payments">Payments</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
