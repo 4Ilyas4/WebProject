@@ -13,6 +13,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import generics
+from datetime import date, datetime
 
 class UserRegister(APIView):
     def post(self, request):
@@ -147,8 +148,36 @@ def user_payments(request):
 @permission_classes([IsAuthenticated])
 def flight_search(request):
     if request.method == 'GET': 
-        min_price = request.query_params.get('max_price')
-        flights = Flight.objects.filter(price__lte=min_price)
+        max_price = request.query_params.get('max_price')
+        airport = request.query_params.get('airport')
+        time = request.query_params.get('time')
+
+        # Check if time is a valid datetime string
+        if time:
+            time = time + " 00:00:00"
+        else:
+            time = None   
+
+        if max_price and max_price.lower() != "nan":  # Convert to lowercase for case-insensitive comparison
+            max_price = float(max_price)
+        else:
+            max_price = None 
+        
+        # Start with all flights
+        flights = Flight.objects.all()
+
+        # Filter based on max_price
+        if max_price:
+            flights = flights.filter(price__lte=max_price)
+
+        # Filter based on departure_airport
+        if airport:
+            flights = flights.filter(departure_airport=airport)
+
+        # Filter based on departure_time
+        if time:
+            flights = flights.filter(departure_time=time)
+            # flights = flights.filter(departure_time=time_date)
+
         serializer = FlightSerializer(flights, many=True)
         return Response(serializer.data)
-

@@ -6,10 +6,12 @@
 
   <div *ngIf="flights$ as flights">
       <h2>Flights</h2>
-      <form class="search-form" (ngSubmit)="searchFlights(maxPrice.value)">
-          <input type="number" #maxPrice placeholder="Максимальная цена">
-          <button type="submit">Поиск</button>
-      </form>
+      <form class="search-form" (ngSubmit)="searchFlights(maxPrice.value, departureAirport.value, departureTime.value)">
+        <input type="number" #maxPrice placeholder="Максимальная цена">
+        <input type="text" #departureAirport placeholder="Аэропорт отправления">
+        <input type="text" #departureTime placeholder="YYYY-MM-DD">
+        <button type="submit">Поиск</button>
+    </form>
       <ul>
           <li class="flight-item" *ngFor="let flight of flights">
               <a [routerLink]="['/flights/',flight.flight_id]"><strong>Buy Flight: </strong>{{ flight.flight_id }}</a>

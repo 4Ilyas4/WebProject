@@ -13,15 +13,15 @@
       <table>
           <thead>
               <tr>
-                  <th>ID</th>
-                  <th>User</th>
-                  <th>Price</th>
+                  <th><strong>ID</strong></th>
+                  <th><strong>User</strong></th>
+                  <th><strong>Price</strong></th>
               </tr>
           </thead>
           <tbody>
               <tr *ngFor="let payment of payments">
                   <td>{{ payment.payment_id }}</td>
-                  <td>{{ payment.user }}</td>
+                  <td>{{ payment.user.email }}</td>
                   <td>{{ payment.price }}</td>
               </tr>
           </tbody>
